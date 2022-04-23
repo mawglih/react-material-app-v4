@@ -1,13 +1,15 @@
 import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { darkTheme } from "./ui/theme";
-import AppBar from "./ui/AppBar";
+import { BrowserRouter } from "react-router-dom";
+import MyRoutes from "../routes";
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar />
-      <h1>Huj</h1>
+      <BrowserRouter>
+        <MyRoutes />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
