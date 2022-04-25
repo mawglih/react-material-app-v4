@@ -27,10 +27,10 @@ export const darkTheme = createTheme({
       fontWeight: 300,
     },
     tab: {
-    fontWeight: 700, 
-    fontSize: '1rem',
-    minWidth: 10,
-    marginLeft: '25px',
+      fontWeight: 700, 
+      fontSize: '1rem',
+      minWidth: 10,
+      marginLeft: '25px',
     },
   },
 });
