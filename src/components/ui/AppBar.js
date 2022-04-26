@@ -74,6 +74,7 @@ const HeaderAppBar = () => {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleChange = (e, value) => {
     setValue(value);
@@ -85,13 +86,80 @@ const HeaderAppBar = () => {
     setOpen(true);
   };
 
-  const handleClose = (e) => {
+  const handleClose = () => {
     setAnchorEl(null);
     setOpen(false);
   };
 
+  const handleMenuItemClick = (e, i) => {
+    const { target } = e;
+    setAnchorEl(target);
+    setOpen(true);
+    setSelectedIndex(i);
+  }
+
+  const menuOptions = [
+    {name: 'Services', link: '/services'},
+    {name: 'Custom development', link: '/custom'},
+    {name: 'Website development', link: '/websites'},
+    {name: 'Mobile development', link: '/mobile'},
+  ]
+
   useEffect(() => {
     const { pathname } = window.location;
+    switch (pathname) {
+      case '/':
+        if (value !== 0) {
+          setValue(0);
+        };
+        break;
+      case '/services':
+        if (value !== 1) {
+          setValue(1);
+          setSelectedIndex(0);
+        };
+        break;
+      case '/custom':
+        if (value !== 1) {
+          setValue(1);
+          setSelectedIndex(1);
+        };
+        break;
+      case '/websites':
+        if (value !== 1) {
+          setValue(1);
+          setSelectedIndex(2);
+          };
+          break;
+      case '/mobile':
+        if (value !== 1) {
+          setValue(1);
+          setSelectedIndex(3);
+        };
+        break;
+      case '/revs':
+        if (value !== 2) {
+          setValue(2);
+        };
+        break;
+      case '/about':
+        if (value !== 3) {
+          setValue(3);
+        };
+        break;
+      case '/contact':
+      if (value !== 4) {
+        setValue(4);
+      };
+        break;
+      case '/estimate':
+      if (value !== 5) {
+        setValue(5);
+      };
+        break;
+      default:
+        break;
+    }
     if (pathname === '/' && value !== 0) {
       setValue(0);
     } else if (pathname === '/services' && value !== 1) {
@@ -144,46 +212,23 @@ const HeaderAppBar = () => {
             }}
             elevation={0}
           >
-            <MenuItem
-              onClick={() => {handleClose(); setValue(1)}}
-              component={Link}
-              to="/services"
-              classes={{
-                root: classes.menuItem,
-              }}
-            >
-              Services
-            </MenuItem>
-            <MenuItem
-              onClick={() => {handleClose(); setValue(1)}}
-              component={Link}
-              to="/custom"
-              classes={{
-                root: classes.menuItem,
-              }}
-            >
-              Custom Development
-            </MenuItem>
-            <MenuItem
-              onClick={() => {handleClose(); setValue(1)}}
-              component={Link}
-              to="/mobile"
-              classes={{
-                root: classes.menuItem,
-              }}
-            >
-              MobileApp Development
-            </MenuItem>
-            <MenuItem
-              onClick={() => {handleClose(); setValue(1)}}
-              component={Link}
-              to="/websites"
-              classes={{
-                root: classes.menuItem,
-              }}
-            >
-              Website Development
-            </MenuItem>
+            {menuOptions.map(({name, link}, index) => {
+              return (
+              <MenuItem
+                key={link}
+                onClick={(e) => {handleMenuItemClick(e, index); setValue(1); handleClose()}}
+                selected={index === selectedIndex && value === 1}
+                component={Link}
+                to={link}
+                classes={{
+                  root: classes.menuItem,
+                }}
+              >
+              {name}
+              </MenuItem>
+              )
+            })}
+    
           </Menu>
         </Toolbar>
       </AppBar>
