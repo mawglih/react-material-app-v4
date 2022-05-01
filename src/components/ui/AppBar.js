@@ -9,10 +9,25 @@ import Button  from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
+import useTheme from '@material-ui/core/styles/useTheme';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
+    marginBottom: '2em',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '1.5em',
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: '1em',
+    },
   },
   toolbar: {
     alignItems: 'center',
@@ -27,6 +42,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-start',
+    [theme.breakpoints.down('md')]: {
+      height: 40,
+      width: 40,
+      alignSelf: 'center',
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: 30,
+      width: 30,
+    },
     '& img': {
       width: '70%',
     },
@@ -35,7 +59,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: '-150px',
+    
+    [theme.breakpoints.down('md')]: {
+      justifyContent: 'center',
+      fontSize: '80%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '60%',
+      marginLeft: '10px',
+    },
   },
   tabsContainer: {
     marginLeft: 150,
@@ -53,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginRight: 50,
+    [theme.breakpoints.down('md')]: {
+      marginRight: 30,
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginRight: 10,
+    },
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
@@ -67,15 +105,29 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  drawerIcon: {
+    height: '50px',
+    width: '50px',
+  },
+  drawerContainer: {
+    marginLeft: 'auto',
+    '&:hover': {
+      backgroundColor: ' transparent',
+    },
+  },
 }));
 
 const HeaderAppBar = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-
+  const theme = useTheme();
+  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   const handleChange = (e, value) => {
     setValue(value);
   };
@@ -83,18 +135,18 @@ const HeaderAppBar = () => {
   const handleClick = (e) => {
     const { target } = e;
     setAnchorEl(target);
-    setOpen(true);
+    setOpenMenu(true);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
   };
 
   const handleMenuItemClick = (e, i) => {
     const { target } = e;
     setAnchorEl(target);
-    setOpen(true);
+    setOpenMenu(true);
     setSelectedIndex(i);
   }
 
@@ -175,6 +227,92 @@ const HeaderAppBar = () => {
     } 
   }, [value]);
 
+  const tabs = (
+    <>
+      <Tabs value={value} onChange={handleChange} className={classes.tabsContainer}>
+        <Tab className={classes.tab} component={Link} to="/" label="Home"/>
+        <Tab
+          aria-owns={anchorEl ? "simple-menu" : undefined}
+          aria-haspopup={anchorEl ? "true" : undefined}
+          className={classes.tab}
+          component={Link}
+          onMouseOver={e => handleClick(e)}
+          to="/services"
+          label="Services"
+        />
+        <Tab className={classes.tab} component={Link} to="/revs" label="Revs"/>
+        <Tab className={classes.tab} component={Link} to="/about" label="About"/>
+        <Tab className={classes.tab} component={Link} to="/contact" label="Contact"/>
+      </Tabs>
+      <Button variant='contained' color='secondary' className={classes.button} component={Link} to="/estimate">Free Estimate</Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleClose}
+        MenuListProps={{ onMouseLeave: handleClose }}
+        classes={{
+          paper: classes.menu,
+        }}
+        elevation={0}
+      >
+        {menuOptions.map(({name, link}, index) => {
+          return (
+          <MenuItem
+            key={link}
+            onClick={(e) => {handleMenuItemClick(e, index); setValue(1); handleClose()}}
+            selected={index === selectedIndex && value === 1}
+            component={Link}
+            to={link}
+            classes={{
+              root: classes.menuItem,
+            }}
+          >
+          {name}
+          </MenuItem>
+          )
+        })}
+      </Menu>
+    </>
+  )
+
+  const drawer = (
+    <>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS} 
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+      >
+        <List disablePadding>
+          {menuOptions.map(({name, link}, index) => {
+            return (
+              <ListItem 
+                key={link}
+                component={Link}
+                to={link}
+                onClick={() => setOpenDrawer(false)}
+                disableTypography
+                button
+                divider
+              >
+                <ListItemText>{name}</ListItemText>
+              </ListItem>
+            )
+          })}
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+        className={classes.drawerContainer}
+      >
+        <MenuIcon className={classes.drawerIcon} />
+      </IconButton>
+    </>
+  );
+  
   return (
     <>
       <AppBar position="fixed" color="primary">
@@ -185,51 +323,7 @@ const HeaderAppBar = () => {
               <img alt="company logl" src={Logo}/>
             </div>
           </div>
-          <Tabs value={value} onChange={handleChange} className={classes.tabsContainer}>
-            <Tab className={classes.tab} component={Link} to="/" label="Home"/>
-            <Tab
-              aria-owns={anchorEl ? "simple-menu" : undefined}
-              aria-haspopup={anchorEl ? "true" : undefined}
-              className={classes.tab}
-              component={Link}
-              onMouseOver={e => handleClick(e)}
-              to="/services"
-              label="Services"
-            />
-            <Tab className={classes.tab} component={Link} to="/revs" label="Revs"/>
-            <Tab className={classes.tab} component={Link} to="/about" label="About"/>
-            <Tab className={classes.tab} component={Link} to="/contact" label="Contact"/>
-          </Tabs>
-          <Button variant='contained' color='secondary' className={classes.button} component={Link} to="/estimate">Free Estimate</Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{ onMouseLeave: handleClose }}
-            classes={{
-              paper: classes.menu,
-            }}
-            elevation={0}
-          >
-            {menuOptions.map(({name, link}, index) => {
-              return (
-              <MenuItem
-                key={link}
-                onClick={(e) => {handleMenuItemClick(e, index); setValue(1); handleClose()}}
-                selected={index === selectedIndex && value === 1}
-                component={Link}
-                to={link}
-                classes={{
-                  root: classes.menuItem,
-                }}
-              >
-              {name}
-              </MenuItem>
-              )
-            })}
-    
-          </Menu>
+          {mobile ? drawer : tabs}
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin}></div>
