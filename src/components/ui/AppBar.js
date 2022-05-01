@@ -115,6 +115,24 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: ' transparent',
     },
   },
+  drawer: {
+    backgroundColor: theme.palette.common.blue,
+  },
+  drawerItem: {
+    ...theme.typography.tab,
+    color: 'white',
+    marginLeft: 0,
+    opacity: .7,
+  },
+  drawerItemEstimate: {
+    backgroundColor: theme.palette.common.orange,
+  },
+  drawerItemSelected: {
+    opacity: 1,
+  },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }));
 
 const HeaderAppBar = () => {
@@ -150,12 +168,21 @@ const HeaderAppBar = () => {
     setSelectedIndex(i);
   }
 
-  const menuOptions = [
+  const servicesOptions = [
     {name: 'Services', link: '/services'},
     {name: 'Custom development', link: '/custom'},
     {name: 'Website development', link: '/websites'},
     {name: 'Mobile development', link: '/mobile'},
-  ]
+  ];
+
+  const menusOptions = [
+    {name: 'Home', link: '/', itemValue: 0, popup: false},
+    {name: 'Services', link: '/services', itemValue: 1, popup: true, ariaOwns: anchorEl ? "simple-menu" : undefined, ariaHaspopup: anchorEl ? "true" : undefined, mouseover: (e) => handleClick(e)},
+    {name: 'Revs', link: '/revs', itemValue: 2,popup: false },
+    {name: 'About us', link: '/about', itemValue: 3, popup: false},
+    {name: 'Contact us', link: '/contact', itemValue: 4, popup: false},
+    {name: 'Free estimate', link: '/estimate', itemValue: 5, popup: false},
+  ];
 
   useEffect(() => {
     const { pathname } = window.location;
@@ -212,39 +239,39 @@ const HeaderAppBar = () => {
       default:
         break;
     }
-    if (pathname === '/' && value !== 0) {
-      setValue(0);
-    } else if (pathname === '/services' && value !== 1) {
-      setValue(1);
-    } else if (pathname === '/revs' && value !== 2) {
-      setValue(2);
-    } else if (pathname === '/about' && value !== 3) {
-      setValue(3);
-    } else if (pathname === '/contact' && value !== 4) {
-      setValue(4);
-    } else if (pathname === '/estimate' && value !== 5) {
-      setValue(5);
-    } 
   }, [value]);
 
   const tabs = (
     <>
       <Tabs value={value} onChange={handleChange} className={classes.tabsContainer}>
-        <Tab className={classes.tab} component={Link} to="/" label="Home"/>
-        <Tab
-          aria-owns={anchorEl ? "simple-menu" : undefined}
-          aria-haspopup={anchorEl ? "true" : undefined}
-          className={classes.tab}
-          component={Link}
-          onMouseOver={e => handleClick(e)}
-          to="/services"
-          label="Services"
-        />
-        <Tab className={classes.tab} component={Link} to="/revs" label="Revs"/>
-        <Tab className={classes.tab} component={Link} to="/about" label="About"/>
-        <Tab className={classes.tab} component={Link} to="/contact" label="Contact"/>
+        {menusOptions.map(({name, link, itemValue, ariaOwns, ariaHaspopup, mouseover}) => {
+         if (name === 'Free estimate') {
+            return (
+              <Button
+                key={link}
+                variant='contained'
+                color='secondary'
+                className={classes.button}
+                component={Link}
+                to={link}
+              >
+                {name}
+              </Button>);
+          } else {
+            return (
+              <Tab
+                key={itemValue}
+                aria-owns={ariaOwns}
+                aria-haspopup={ariaHaspopup}
+                className={classes.tab}
+                component={Link}
+                onMouseOver={mouseover}
+                to={link}
+                label={name}
+              />);
+          }
+        })}
       </Tabs>
-      <Button variant='contained' color='secondary' className={classes.button} component={Link} to="/estimate">Free Estimate</Button>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -256,7 +283,7 @@ const HeaderAppBar = () => {
         }}
         elevation={0}
       >
-        {menuOptions.map(({name, link}, index) => {
+        {servicesOptions.map(({name, link}, index) => {
           return (
           <MenuItem
             key={link}
@@ -284,20 +311,28 @@ const HeaderAppBar = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
+        classes={{
+          paper: classes.drawer,
+        }}
       >
+        <div className={classes.toolbarMargin} />
         <List disablePadding>
-          {menuOptions.map(({name, link}, index) => {
+          {menusOptions.map(({name, link, itemValue}, index) => {
             return (
               <ListItem 
                 key={link}
                 component={Link}
                 to={link}
-                onClick={() => setOpenDrawer(false)}
-                disableTypography
+                onClick={() => {setOpenDrawer(false); setValue(itemValue);}}
                 button
                 divider
+                className={name==='Free estimate' ? [`${classes.drawerItemEstimate}`] : null}
+                selected={value === itemValue}
+                classes={{
+                  selected: classes.drawerItemSelected,
+                }}
               >
-                <ListItemText>{name}</ListItemText>
+                <ListItemText className={classes.drawerItem}>{name}</ListItemText>
               </ListItem>
             )
           })}
@@ -315,7 +350,7 @@ const HeaderAppBar = () => {
   
   return (
     <>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar disableGutters className={classes.toolbar}>
           <div className={classes.titleContainer}>
             <h2 className={classes.title}>Design and perfection</h2>

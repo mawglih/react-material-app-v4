@@ -9,11 +9,12 @@ import Mobile from './components/Mobile';
 import Custom from './components/Custom';
 import HeaderAppBar from "./components/ui/AppBar";
 import Estimate from "./components/Estimate";
+import Footer from "./components/ui/Footer";
 
 const MyRoutes = () => {
   return (
     <>
-    <HeaderAppBar />
+      <HeaderAppBar />
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -25,6 +26,7 @@ const MyRoutes = () => {
         <Route path="/custom" element={<Custom />} />
         <Route path="/estimate" element={<Estimate />} />
       </Routes>
+      <Footer />
     </>
       
   )
