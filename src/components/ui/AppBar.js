@@ -17,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { servicesOptions } from './constants';
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
@@ -135,17 +136,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderAppBar = () => {
+const HeaderAppBar = ({
+  value,
+  setValue,
+  selectedIndex,
+  setSelectedIndex,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  
   const theme = useTheme();
   const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const mobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+    
   const handleChange = (e, value) => {
     setValue(value);
   };
@@ -167,13 +173,6 @@ const HeaderAppBar = () => {
     setOpenMenu(true);
     setSelectedIndex(i);
   }
-
-  const servicesOptions = [
-    {name: 'Services', link: '/services'},
-    {name: 'Custom development', link: '/custom'},
-    {name: 'Website development', link: '/websites'},
-    {name: 'Mobile development', link: '/mobile'},
-  ];
 
   const menusOptions = [
     {name: 'Home', link: '/', itemValue: 0, popup: false},
@@ -239,7 +238,7 @@ const HeaderAppBar = () => {
       default:
         break;
     }
-  }, [value]);
+  }, [setSelectedIndex, setValue, value]);
 
   const tabs = (
     <>

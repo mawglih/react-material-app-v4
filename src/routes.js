@@ -7,30 +7,20 @@ import Contact from './components/Contact';
 import Websites from './components/Websites';
 import Mobile from './components/Mobile';
 import Custom from './components/Custom';
-import HeaderAppBar from "./components/ui/AppBar";
 import Estimate from "./components/Estimate";
-import Footer from "./components/ui/Footer";
 
-const MyRoutes = () => {
-  return (
-    <>
-      <HeaderAppBar />
-      <Routes>
-        <Route index path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/revs" element={<Revs />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/websites" element={<Websites />} />
-        <Route path="/mobile" element={<Mobile />} />
-        <Route path="/custom" element={<Custom />} />
-        <Route path="/estimate" element={<Estimate />} />
-      </Routes>
-      <Footer />
-    </>
-      
-  )
-
-}
+const MyRoutes = () => (
+  <Routes>
+    <Route index path="/" element={<Home />} />
+    <Route path="/services" element={<Services />} />
+    <Route path="/revs" element={<Revs />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/websites" element={<Websites />} />
+    <Route path="/mobile" element={<Mobile />} />
+    <Route path="/custom" element={<Custom />} />
+    <Route path="/estimate" element={<Estimate />} />
+  </Routes>
+);
 
 export default MyRoutes;
