@@ -1,6 +1,10 @@
+import Hero from "./ui/Hero";
+
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <Hero />
+    </div>
   );
 };
 

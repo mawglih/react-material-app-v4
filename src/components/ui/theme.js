@@ -24,7 +24,11 @@ export const darkTheme = createTheme({
     fontSize: 12,
     fontWeight: 700,
     h2: {
-      fontWeight: 300,
+      fontFamily: 'Raleway',
+      fontSize: '2.5rem',
+      color: `${myBlue}`,
+      fontWeight: 700,
+      lineHeight: 1.5,
     },
     tab: {
       fontWeight: 700, 

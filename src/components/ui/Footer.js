@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import { servicesOptions, techOptions, aboutOptions } from "./constants";
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,77 +57,80 @@ const Footer = ({
   const classes = useStyles();
   return (
     <footer className={classes.root}>
-      <Grid container justifyContent="center" className={classes.gridContainer}>
-        <Grid item className={classes.gridItem}>
-          <Grid container direction="column" spacing={5}>
-            <Grid
-              onClick={(e) => setValue(0)}
-              className={classes.link}
-              component={Link}
-              to='/'
-            >
-              Home
+      <Hidden mdDown>
+        <Grid container justifyContent="center" className={classes.gridContainer}>
+          <Grid item className={classes.gridItem}>
+            <Grid container direction="column" spacing={5}>
+              <Grid
+                onClick={(e) => setValue(0)}
+                className={classes.link}
+                component={Link}
+                to='/'
+              >
+                Home
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={classes.gridItem}>
+            <Grid container direction="column" spacing={5}>
+              {servicesOptions?.map(({ name, link, selectedIndex }, index) => (
+                <Grid
+                  className={classes.link}
+                  key={`${link}${index}`}
+                  component={Link}
+                  selected={index === selectedIndex}
+                  to={link}
+                  onClick={() => {setValue(1); setSelectedIndex(selectedIndex);}}
+                >
+                  {name}
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item className={classes.gridItem}>
+            <Grid container direction="column" spacing={5}>
+              {techOptions?.map(({ name, link, value }, index) => (
+                <Grid
+                  className={classes.link}
+                  key={`${link}${index}`}
+                  component={Link}
+                  to={link}
+                  onClick={() => setValue(value)}
+                >
+                  {name}
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item className={classes.gridItem}>
+            <Grid container direction="column" spacing={5}>
+              {aboutOptions?.map(({ name, link, value }, index) => (
+                <Grid
+                  className={classes.link}
+                  key={`${link}${index}`}
+                  component={Link}
+                  to={link}
+                  onClick={() => setValue(value)}
+                >
+                  {name}
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item className={classes.gridItem}>
+            <Grid container direction="column" spacing={5}>
+              <Grid
+                className={classes.link}
+                component={Link}
+                to='/contact'
+                onClick={() => setValue(4)}
+              >
+                Contact us
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item className={classes.gridItem}>
-          <Grid container direction="column" spacing={5}>
-            {servicesOptions?.map(({ name, link, value, selectedIndex }, index) => (
-              <Grid
-                className={classes.link}
-                key={`${link}${index}`}
-                component={Link}
-                to={link}
-                onClick={() => {setValue(value); setSelectedIndex(selectedIndex);}}
-              >
-                {name}
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-        <Grid item className={classes.gridItem}>
-          <Grid container direction="column" spacing={5}>
-            {techOptions?.map(({ name, link, value }, index) => (
-              <Grid
-                className={classes.link}
-                key={`${link}${index}`}
-                component={Link}
-                to={link}
-                onClick={() => setValue(value)}
-              >
-                {name}
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-        <Grid item className={classes.gridItem}>
-          <Grid container direction="column" spacing={5}>
-            {aboutOptions?.map(({ name, link, value }, index) => (
-              <Grid
-                className={classes.link}
-                key={`${link}${index}`}
-                component={Link}
-                to={link}
-                onClick={() => setValue(value)}
-              >
-                {name}
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-        <Grid item className={classes.gridItem}>
-          <Grid container direction="column" spacing={5}>
-            <Grid
-              className={classes.link}
-              component={Link}
-              to='/contact'
-              onClick={() => setValue(4)}
-            >
-              Contact us
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      </Hidden>
       <div className={classes.adorn}/>
     </footer>
   )
