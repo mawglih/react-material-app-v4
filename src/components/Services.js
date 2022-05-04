@@ -3,10 +3,10 @@ import ServiceItem from "./ui/ServiceItem";
 
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
+    marginTop: '5vh',
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 2fr)',
     gridTemplateRows: 'repeat(3, 1fr)',
-    gridRowGap: '2rem',
     gridColumnGap: '10px',
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '100%',

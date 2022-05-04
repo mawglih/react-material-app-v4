@@ -1,7 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
 import Icon from '@material-ui/core/Icon';
-import Grid from '@material-ui/core/grid';
-import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   itemContainer: {
@@ -71,9 +69,9 @@ const ServiceItem = ({
   };
     
   return (
-    <Grid component={Link} to={to}>
+    
       <div className={[`${classes.itemContainer} ${myClass} `]} >
-      <div className={classes.textContainer}>
+        <div className={classes.textContainer}>
         <h2>{title}</h2>
         <h4>{subTitle}</h4>
         <p>{text}</p>
@@ -81,8 +79,9 @@ const ServiceItem = ({
       <div className={classes.imageContainer}>
         <Icon className={imageIcon} fontSize='large' classes={{ root: classes.icon }}/>
       </div>  
+
     </div>
-    </Grid>
+    
     
   )
 }
