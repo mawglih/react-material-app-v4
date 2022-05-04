@@ -77,12 +77,17 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.tab,
   },
   button: {
+    ...theme.typography.estimate,
     borderRadius: '50px',
     marginRight: '25px',
     marginLeft: '50px',
-    font: 'Roboto',
     color: 'white',
-    fontSize: '1rem',
+    fontSize: '1.2rem',
+    height: 45,
+    width: 145,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   title: {
     marginRight: 50,

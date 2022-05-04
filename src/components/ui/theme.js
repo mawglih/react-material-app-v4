@@ -1,7 +1,8 @@
 import { createTheme } from '@material-ui/core/styles';
 
 const myBlue = "#0838FF";
-const myOrange = "#FFBA44"
+const myOrange = "#FFBA44";
+const myGrey = "#232323"
 
 export const darkTheme = createTheme({
   palette: {
@@ -30,11 +31,33 @@ export const darkTheme = createTheme({
       fontWeight: 700,
       lineHeight: 1.5,
     },
+    h3: {
+      fontFamily: ['Great Vibes', 'cursive',].join(','),
+      fontSize: '2rem',
+      color: `${myBlue}`,
+    },
+    subtitle1: {
+      fontSize: '1.25rem',
+      fontWeight: 300,
+      color: myGrey,
+    },
+      subtitle2: {
+      fontSize: '1.25rem',
+      fontWeight: 300,
+      color: 'white',
+    },
     tab: {
       fontWeight: 700, 
       fontSize: '1rem',
       minWidth: 10,
       marginLeft: '25px',
+    },
+    estimate: {
+      fontFamily: ['Great Vibes', 'cursive',].join(','),
+      color: 'white',
+      fontWeight: 'bold',
+      textTransform: 'none',
+      fontSize: '1.1em',
     },
   },
 });
