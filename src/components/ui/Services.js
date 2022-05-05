@@ -1,5 +1,6 @@
-import { makeStyles } from "@material-ui/core";
-import ServiceItem from "./ui/ServiceItem";
+import { makeStyles, } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
+import ServiceItem from "./ServiceItem";
 
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
@@ -11,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '100%',
       gridTemplateRows: 'auto',
-      gridRowGap: '1rem',
+      gridRowGap: 0,
+      marginTop: 0,
     },
     '& a':{
       textDecoration: 'none',
@@ -26,18 +28,23 @@ const serviceItems = [
   { title: 'Web Development', subTitle: 'Save', text: 'Complete digital solutions from investigation to finish.', imageIcon : 'fa-brands fa-safari', order: 3, to: '/websites'},
 ];
 
-const Services = () => {
+const Services = ({
+  override,
+}) => {
 const classes = useStyles();
-  return (
+   return (
     <div className={classes.serviceContainer}>
-      {serviceItems.map(({ title, subTitle, text, imageIcon, order, to }) => (
+       <Typography variant="h2">Services</Typography>
+       {serviceItems.map(({ title, subTitle, text, imageIcon, order, to }) => (
         <ServiceItem
+          key={title}
           title={title}
           text={text}
           imageIcon={imageIcon}
           subTitle={subTitle}
           order={order}
           to={to}
+          overrideClass={override}
         />
       ))}
     </div>

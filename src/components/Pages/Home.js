@@ -1,9 +1,10 @@
-import Hero from "./ui/Hero";
-import Services from "./Services";
-import About from './About';
-import Revs from './Revs';
+import Hero from "../ui/Hero";
+import Services from "../ui/Services";
+import About from '../ui/About';
+import Revs from '../ui/Revs';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
+import CallToActions from "../ui/CallToActions";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -27,6 +28,7 @@ const Home = () => {
         <Revs />
         <Services />
         <About />
+        <CallToActions />
       </Grid> 
 
      

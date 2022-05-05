@@ -1,9 +1,8 @@
 import Grid from "@material-ui/core/Grid";
-import Button from '@material-ui/core/Button';
-import ButtonArrow from './ui/ButtonArrow';
 import Typography from "@material-ui/core/Typography";
-import aboutBkg from '../assets/aboutbkg.png';
+import aboutBkg from '../../assets/aboutbkg.png';
 import { makeStyles } from "@material-ui/core";
+import LearnButton from "./LearnButton";
 
 const useStyles = makeStyles(theme => ({
   about: {
@@ -11,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: '5em',
     [theme.breakpoints.down('xs')]: {
       height: '100vh',
+      marginTop: 0,
     },
   },
   info: {
@@ -33,9 +33,7 @@ const useStyles = makeStyles(theme => ({
     height: 45,
     width: 145,
   },
-    learnText: {
-    marginRight: '10px',
-  },
+
   textContainer: {
     position: "absolute",
   }
@@ -55,13 +53,11 @@ const About = () => {
               <Typography variant="subtitle2">
                 Let's get personal
               </Typography>
-              <Button
-                variant="outlined"
-                className={classes.learnButtonAbout}
-              >
-                <span className={classes.learnText}>Learn More</span>
-                <ButtonArrow width={15} height={15} fill={'white'}/>
-              </Button>
+              <LearnButton
+                color="white"
+                bkgColor="white"
+                fillArr="white"
+              />
             </Grid>
           </Grid>
           <Grid item sm style={{ marginRight: '5em'}}>
@@ -72,13 +68,11 @@ const About = () => {
               <Typography variant="subtitle2">
                 Say hello!
               </Typography>
-              <Button
-                variant="outlined"
-                className={classes.learnButtonAbout}
-              >
-                <span className={classes.learnText}>Learn More</span>
-                <ButtonArrow width={15} height={15} fill={'white'}/>
-              </Button>
+              <LearnButton
+                color="white"
+                bkgColor="white"
+                fillArr="white"
+              />
             </Grid>
           </Grid>
         </Grid>

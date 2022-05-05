@@ -3,9 +3,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
-import ButtonArrow from './ui/ButtonArrow';
+import ButtonArrow from './ButtonArrow';
 import Typography from "@material-ui/core/Typography";
-import revBack from '../assets/169.png';
+import revBack from '../../assets/169.png';
 
 const useStyles = makeStyles(theme => ({
 cardContent: {
@@ -15,6 +15,11 @@ cardContent: {
     height: '50em',
     marginTop: '10em',
     position: 'relative',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 0,
+      height: '16em',
+      marginBottom: '1em',
+    },
   },
   revolutionBackground: {
     backgroundImage: `url(${revBack})`,
@@ -31,8 +36,10 @@ cardContent: {
     padding: '10em',
     marginTop: '10em',
     [theme.breakpoints.down('sm')]: {
-      padding: '8em 0 8em 0',
       borderRadius: 0,
+      marginTop: 0,
+      marginBottom: 0,
+      padding: '3em',
     },
   },
     learnButtonAbout: {
