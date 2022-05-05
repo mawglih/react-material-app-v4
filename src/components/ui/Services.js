@@ -1,6 +1,7 @@
 import { makeStyles, } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import ServiceItem from "./ServiceItem";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
@@ -19,7 +20,15 @@ const useStyles = makeStyles(theme => ({
       textDecoration: 'none',
     },
   },
-
+  text: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& h2': {
+      textAlign: 'center',
+      
+    },
+  },
 }));
 
 const serviceItems = [
@@ -32,9 +41,15 @@ const Services = ({
   override,
 }) => {
 const classes = useStyles();
+const { pathname } = useLocation();
+
    return (
     <div className={classes.serviceContainer}>
-       <Typography variant="h2">Services</Typography>
+       {pathname === '/services' ? (
+         <div className={classes.text}>
+          <Typography variant="h2">Services</Typography>
+        </div>
+        ) : null}
        {serviceItems.map(({ title, subTitle, text, imageIcon, order, to }) => (
         <ServiceItem
           key={title}
