@@ -46,6 +46,10 @@ export const darkTheme = createTheme({
       fontWeight: 300,
       color: 'white',
     },
+    body1: {
+      fontFamily: ['Great Vibes', 'cursive',].join(','),
+      fontSize: '1.5rem',
+    },
     tab: {
       fontWeight: 700, 
       fontSize: '1rem',

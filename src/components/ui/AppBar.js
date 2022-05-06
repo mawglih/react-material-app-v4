@@ -8,7 +8,7 @@ import Logo from '../../assets/pic1a.svg';
 import Button  from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useTheme from '@material-ui/core/styles/useTheme';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: '1em',
     },
+  },
+  smallMargin: {
+    ...theme.mixins.toolbar,
   },
   toolbar: {
     alignItems: 'center',
@@ -351,6 +354,8 @@ const HeaderAppBar = ({
       </IconButton>
     </>
   );
+  const { pathname } = useLocation();
+  const override = (pathname === '/' || pathname === '/revs');
   
   return (
     <>
@@ -365,7 +370,7 @@ const HeaderAppBar = ({
           {mobile ? drawer : tabs}
         </Toolbar>
       </AppBar>
-      <div className={classes.toolbarMargin}></div>
+      <div className={override ? classes.toolbarMargin : classes.smallMargin}></div>
     </>
   );
 }

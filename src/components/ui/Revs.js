@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import ButtonArrow from './ButtonArrow';
 import Typography from "@material-ui/core/Typography";
 import revBack from '../../assets/169.png';
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
 cardContent: {
@@ -20,6 +21,9 @@ cardContent: {
       height: '16em',
       marginBottom: '1em',
     },
+  },
+  override: {
+    marginTop: 0,
   },
   revolutionBackground: {
     backgroundImage: `url(${revBack})`,
@@ -57,10 +61,12 @@ const Revs = () => {
 
   const classes = useStyles();
   const theme = useTheme();
+  const { pathname } = useLocation();
+  const override = pathname === '/revs';
 
   return (
    <Grid item>
-      <Grid container justify="center" className={classes.card}>
+      <Grid container justify="center" className={override ? [`${classes.card} ${classes.override}`] : classes.override}>
         <Card className={classes.revCard}>
           <CardContent>
             <Grid container direction="column" className={classes.cardContent}>

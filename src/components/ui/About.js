@@ -3,6 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import aboutBkg from '../../assets/aboutbkg.png';
 import { makeStyles } from "@material-ui/core";
 import LearnButton from "./LearnButton";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   about: {
@@ -36,14 +37,23 @@ const useStyles = makeStyles(theme => ({
 
   textContainer: {
     position: "absolute",
-  }
+  },
+  aboutPage: {
+    height: '50em',
+    marginTop: 0,
+    [theme.breakpoints.down('xs')]: {
+      height: '100vh',
+    },
+  },
 }));
 
 const About = () => {
   const classes = useStyles();
+  const { pathname } = useLocation();
+  const override = pathname === '/about';
   return (
     <Grid item>
-      <Grid container direction="row" className={classes.about} alignItems='center'> 
+      <Grid container direction="row" className={override ? classes.aboutPage : classes.about} alignItems='center'> 
         <Grid container direction="row" justifyContent="space-between" className={classes.textContainer}>
           <Grid sm item style={{ marginLeft: '5em'}}>
             <Grid container direction="column" alignItems='flex-start' justifyContent="flex-start">
