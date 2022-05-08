@@ -18,10 +18,10 @@ const Hero = () => {
   return (
     
       <Grid item>
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction="row" justifyContent="center" alignItems="center">
           <Grid item>
             <Typography align="center" variant="h2"> Bringing West Coast Technology<br />to the Midwest</Typography>
-            <Grid container direction="row" justify='center' className={classes.buttons}>
+            <Grid container direction="row" justifyContent='center' className={classes.buttons}>
               <Grid item>
                 <EstimateButton 
                   marginRight={40}

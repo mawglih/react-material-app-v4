@@ -12,7 +12,7 @@ const ContactPage = () => {
 
   return (
     <Grid container>
-      <Contact handleSubmit={data => handleSubmit(data)}/>
+      <Contact handleSubmit={handleSubmit}/>
       <Grid item container direction="column"sm>
         {data && (
           <Grid item>

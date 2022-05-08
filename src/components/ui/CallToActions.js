@@ -37,7 +37,7 @@ const CallToActions = () => {
     container
     className={[`${classes.container} ${classes.info}`]}
     alignItems='center'
-    justify={matches ? 'centered' : 'space-between'}
+    justifyContent={matches ? 'centered' : 'space-between'}
     direction={matches ? 'column' : 'row'}
   >
      <Grid item style={{marginLeft: matches ? 0 : '5em', textAlign: matches ? 'center' : 'inherit'}}>
@@ -48,7 +48,7 @@ const CallToActions = () => {
          <Typography variant="subtitle2" style={{fontSize:'1.5rem'}}>
           Take advantage of technology of 21st century
          </Typography>
-         <Grid container item justify={matches ? 'center' : 'undefined'}>
+         <Grid container item justifyContent={matches ? 'center' : 'undefined'}>
           <LearnButton/>
          </Grid>
        </Grid>

@@ -1,14 +1,11 @@
-import { Link } from "react-router-dom";
 import { makeStyles, useTheme }from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Form from "./Form";
 import infoBkg from '../../assets/infoBkg2.png';
 import CallToActions from "./CallToActions";
-import { Button, useMediaQuery } from "@material-ui/core";
-
-import { useState } from "react";
+import { useMediaQuery } from "@material-ui/core";
+import FormWithDialog from "./FormWithDialog";
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +28,10 @@ const useStyles = makeStyles(theme => ({
   },
   contacts: {
     marginLeft: '1rem',
-  }
+  },
+  form: {
+    padding: '0 1rem 0 1rem',
+  },
 }));
 
 const Contact = ({
@@ -40,7 +40,7 @@ const Contact = ({
   const classes = useStyles();
   const theme = useTheme();
   const matchesMd = useMediaQuery(theme.breakpoints.down('md'));
-  const [open, setOpen] = useState(false);
+
 
   return (
     <Grid container direction="row">
@@ -49,7 +49,7 @@ const Contact = ({
         container
         direction="column"
         lg={3}
-        justify="center"
+        justifyContent="center"
         alignItems="center"
       >
         <Grid item>
@@ -92,10 +92,11 @@ const Contact = ({
                 item
                 container
                 alignItems="center"
-                justify="center"
+                justifyContent="center"
                 direction="column"
+                className={classes.form}
               >
-                <Form handleSubmit={data => handleSubmit(data)} noButton/>
+                <FormWithDialog handleSubmit={handleSubmit} noButton/>
               </Grid>
           </Grid>
         </Grid>

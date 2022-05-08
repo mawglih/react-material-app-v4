@@ -68,7 +68,7 @@ export const darkTheme = createTheme({
     MuiInputLabel: {
       root: {
         color: myBlue,
-        fontSize: '1rem',
+        fontSize: '.8rem',
       },
     },
     MuiInput: {
