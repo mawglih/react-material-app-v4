@@ -25,6 +25,10 @@ const Hero = () => {
               <Grid item>
                 <EstimateButton 
                   marginRight={40}
+                  variant="outlined"
+                  width={145}
+                  height={45}
+                  fontSize='.9em'
                 />
               </Grid>
               <Grid item>

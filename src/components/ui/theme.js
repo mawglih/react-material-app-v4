@@ -64,4 +64,22 @@ export const darkTheme = createTheme({
       fontSize: '1.1em',
     },
   },
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: myBlue,
+        fontSize: '1rem',
+      },
+    },
+    MuiInput: {
+      underline: {
+        '&:before': {
+          borderBottom: `2px solid ${myBlue}`,
+        },
+        '&:hover:not($disabled):not(#focused):not($error):before': {
+          borderBottom: `2px solid ${myBlue}`,
+        },
+      },
+    },
+  },
 });

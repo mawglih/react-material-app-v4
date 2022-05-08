@@ -1,5 +1,6 @@
 import { makeStyles, } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import ServiceItem from "./ServiceItem";
 import { useLocation } from "react-router-dom";
 
@@ -44,7 +45,8 @@ const classes = useStyles();
 const { pathname } = useLocation();
 
    return (
-    <div className={classes.serviceContainer}>
+     <Grid item>
+      <div className={classes.serviceContainer}>
        {pathname === '/services' ? (
          <div className={classes.text}>
           <Typography variant="h2">Services</Typography>
@@ -63,6 +65,8 @@ const { pathname } = useLocation();
         />
       ))}
     </div>
+     </Grid>
+
   );
 };
 

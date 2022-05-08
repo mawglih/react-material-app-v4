@@ -5,7 +5,7 @@ import LearnButton from "./LearnButton";
 const useStyles = makeStyles(theme => ({
   itemContainer: {
     width: '100%',
-    height: '200px',
+    height: '',
     backgroundColor: theme.palette.secondary.light,
     color: 'white',
     position: 'relative',
@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
   textContainer: {
     paddingLeft: '30px',
     textAlign: 'center',
+    marginBottom: '1em'
   },
   icon: {
     color: 'red',

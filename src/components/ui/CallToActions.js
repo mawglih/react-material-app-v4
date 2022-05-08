@@ -57,7 +57,8 @@ const CallToActions = () => {
       <EstimateButton
         height={80}
         width={205}
-        fontSize="1.5rem"
+        fontSize="1.4rem"
+        variant='outlined'
         marginRight={matches ? 0 : '5em'}
         marginLeft={matches ? 0 : '2em'}
       />

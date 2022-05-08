@@ -66,7 +66,7 @@ const Revs = () => {
 
   return (
    <Grid item>
-      <Grid container justify="center" className={override ? [`${classes.card} ${classes.override}`] : classes.override}>
+      <Grid container justify="center" className={override ? [`${classes.card} ${classes.override}`] : classes.card}>
         <Card className={classes.revCard}>
           <CardContent>
             <Grid container direction="column" className={classes.cardContent}>
