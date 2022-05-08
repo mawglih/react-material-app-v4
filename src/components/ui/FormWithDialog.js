@@ -79,13 +79,10 @@ const FormWithDialog = ({
     handleSubmit(data);
     setOpen(false);
     clearData();
-    // setData( { fullname: '', email: '', phone: '', message: '', });
   }
 
   const disabled= fullname?.length === 0 || message?.length === 0 || phoneHelper?.length > 0 || emailHelper?.length > 0;
   
-  console.log('result', data);
-
   return (
     <>
       <Form 

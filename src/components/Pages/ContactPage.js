@@ -5,7 +5,6 @@ import Contact from '../ui/Contact';
 
 const ContactPage = () => {
   const handleSubmit = data => {
-    console.log("data CP", data)
     setData(data);
   }
   const [data, setData] = useState({});
